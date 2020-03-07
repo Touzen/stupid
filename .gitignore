@@ -1,5 +1,7 @@
+*.pyc
 .idea
 *.hdf5
 bin
 lib
 pyvenv*
+stupid/
