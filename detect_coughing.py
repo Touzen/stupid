@@ -1,8 +1,9 @@
 from keras.models import load_model
 import tensorflow as tf
 import numpy as np
-from vggish_input import waveform_to_examples
-import ubicoustics
+from ubicoustics.vggish_input import waveform_to_examples
+from ubicoustics import microphones
+from ubicoustics import ubicoustics
 import pyaudio
 from pathlib import Path
 import time
@@ -24,7 +25,6 @@ print("=====")
 print("1 / 2: Checking Microphones... ")
 print("=====")
 
-from ubicoustics import microphones
 desc, mics, indices = microphones.list_microphones()
 if (len(mics) == 0):
     print("Error: No microphone found.")
@@ -42,8 +42,8 @@ try:
         MICROPHONE_INDEX = int(args.mic)
         print("User selected mic: %d" % MICROPHONE_INDEX)
     else:
-        mic_in = input("Select microphone [%d]: " % MICROPHONE_INDEX).strip()
-        if (mic_in!=''):
+        mic_in = input("Select microphone [%d]: " % MICROPHONE_INDEX)
+        if mic_in != '':
             MICROPHONE_INDEX = int(mic_in)
 except:
     print("Invalid microphone")
@@ -53,7 +53,7 @@ except:
 mic_desc = ""
 for k in range(len(indices)):
     i = indices[k]
-    if (i==MICROPHONE_INDEX):
+    if i == MICROPHONE_INDEX:
         mic_desc = mics[k]
 print("Using mic: %s" % mic_desc)
 
@@ -65,9 +65,9 @@ MODEL_PATH = "models/example_model.hdf5"
 print("=====")
 print("2 / 2: Checking model... ")
 print("=====")
-model_filename = "models/example_model.hdf5"
+model_filename = "ubicoustics/models/example_model.hdf5"
 ubicoustics_model = Path(model_filename)
-if (not ubicoustics_model.is_file()):
+if not ubicoustics_model.is_file():
     print("Downloading example_model.hdf5 [867MB]: ")
     wget.download(MODEL_URL,MODEL_PATH)
 
