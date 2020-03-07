@@ -1,2 +1,5 @@
 .idea
 *.hdf5
+bin
+lib
+pyvenv*
