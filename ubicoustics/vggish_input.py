@@ -3,8 +3,7 @@
 
 import numpy as np
 from scipy.io import wavfile
-import mel_features
-import vggish_params
+from ubicoustics import mel_features, vggish_params
 
 def waveform_to_examples(data, sample_rate):
   # Convert to mono.

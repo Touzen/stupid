@@ -17,6 +17,7 @@ RATE = 16000
 CHUNK = RATE
 MICROPHONES_DESCRIPTION = []
 FPS = 60.0
+COUGHING_INDEX = ubicoustics.labels['cough']
 
 ###########################
 # Checl Microphone
@@ -98,13 +99,8 @@ def audio_samples(in_data, frame_count, time_info, status_flags):
             predictions.append(pred)
 
         for prediction in predictions:
-            m = np.argmax(prediction[0])
-            if (m < len(label)):
-                p = label[m]
-                print("Prediction: %s (%0.2f)" % (ubicoustics.to_human_labels[label[m]], prediction[0,m]))
-                n_items = prediction.shape[1]
-            else:
-                print("KeyError: %s" % m)
+            print(f"Coughing confidence: {prediction[0, COUGHING_INDEX]:0.2f}")
+            n_items = prediction.shape[1]
 
     return (in_data, pyaudio.paContinue)
 
