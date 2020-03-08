@@ -1,5 +1,5 @@
 # Helper functions, written by GL 12/2018
-import easing
+from ubicoustics import easing
 import sys
 import time
 import numpy as np
